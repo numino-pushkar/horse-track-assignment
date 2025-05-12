@@ -1,0 +1,40 @@
+class CashInventory:
+    DEFAULT_STOCK = {100: 10, 20: 10, 10: 10, 5: 10, 1: 10}
+
+    def __init__(self):
+        self.inventory = CashInventory.DEFAULT_STOCK.copy()
+
+    def restock(self):
+        self.inventory = CashInventory.DEFAULT_STOCK.copy()
+
+    def add_back(self, bills: dict):
+        for denom, count in bills.items():
+            self.inventory[denom] += count
+
+    def can_dispense(self, amount: int) -> bool:
+        return self.dispense(amount) is not None
+
+    def dispense(self, amount: int) -> dict | None:
+        result = {}
+        remaining = amount
+        temp_inventory = self.inventory.copy()
+
+        for denom in sorted(temp_inventory.keys(), reverse=True):
+            count = min(remaining // denom, temp_inventory[denom])
+            if count > 0:
+                result[denom] = count
+                remaining -= denom * count
+
+        if remaining == 0:
+            # Update real inventory
+            for denom, count in result.items():
+                self.inventory[denom] -= count
+            return result
+        else:
+            return None  # Insufficient funds in required denominations
+
+    def __str__(self):
+        lines = ["Inventory:"]
+        for denom in sorted(self.inventory.keys(), reverse=True):
+            lines.append(f"${denom},{self.inventory[denom]}")
+        return "\n".join(lines)

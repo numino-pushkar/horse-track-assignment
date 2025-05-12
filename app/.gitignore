@@ -1,0 +1,8 @@
+*.pyd
+\scripts
+\lib
+*.dll
+*.exe
+*.cfg
+*.xml
+\idea
