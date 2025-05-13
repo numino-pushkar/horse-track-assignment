@@ -1,11 +1,13 @@
-from commands.place_bet_command import PlaceBetCommand
-from commands.set_winner_command import SetWinnerCommand
-from commands.inventory_command import InventoryCommand
-from commands.display_command import DisplayCommand
-from commands.restock_command import RestockCommand
-from commands.quit_command import QuitCommand
-from core.horse_manager import HorseManager
-from core.cash_inventory import CashInventory
+from app.commands.place_bet_command import BetCommand as PlaceBetCommand
+from app.commands.set_winner_command import WinningsCommand as SetWinnerCommand
+from app.commands.inventory_command import InventoryCommand
+from app.commands.display_command import DisplayCommand
+from app.commands.restock_command import RestockCommand
+from app.commands.quit_command import QuitCommand
+from app.model.horse_manager import HorseManager
+from app.model.cash_inventory import CashInventory
+from app.exceptions.exceptions import InvalidCommandException
+
 
 class CommandRegistry:
     def __init__(self):
@@ -24,6 +26,5 @@ class CommandRegistry:
     def get_command(self, name: str):
         command = self.commands.get(name.lower())
         if not command:
-            from exceptions import InvalidCommandException
             raise InvalidCommandException(name)
         return command

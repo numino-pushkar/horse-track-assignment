@@ -1,9 +1,13 @@
-from exceptions import (
+from app.exceptions.exceptions import (
     InvalidHorseException,
     InvalidBetFormatException,
     NoPayoutException,
     InsufficientFundsException,
 )
+from app.interfaces.command import Command
+from app.model.horse_manager import HorseManager
+from app.model.cash_inventory import CashInventory
+
 
 class BetCommand(Command):
     def __init__(self, horse_manager: HorseManager, cash_inventory: CashInventory):

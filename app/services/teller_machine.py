@@ -1,6 +1,7 @@
 from app.commands.command_registry import CommandRegistry
 from app.exceptions.exceptions import BettingTerminalException, QuitException
 
+
 class TellerMachine:
     def __init__(self):
         self.command_registry = CommandRegistry()
@@ -20,11 +21,11 @@ class TellerMachine:
                 output = command.execute(args)
                 print(output)
 
-            except BettingTerminalException as e:
-                print(f"Error: {str(e)}")
             except QuitException as qe:
                 print(str(qe))
                 break
+            except BettingTerminalException as e:
+                print(f"Error: {str(e)}")
             except Exception as e:
                 # Handle unexpected errors gracefully
                 print(f"Unexpected error: {str(e)}")

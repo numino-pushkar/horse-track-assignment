@@ -13,7 +13,7 @@ class InvalidCommandException(BettingTerminalException):
 
 class InvalidHorseException(BettingTerminalException):
     """Raised when a horse number is not found."""
-    def __init__(self, horse_number: int):
+    def __init__(self, horse_number: str):
         super().__init__(f"Invalid Horse Number: {horse_number}")
 
 
@@ -39,7 +39,4 @@ class QuitException(BettingTerminalException):
     """Raised to signal graceful shutdown of the application."""
     pass
 
-class QuitCommand(Command):
-    def execute(self, args: list[str]) -> str:
-        raise QuitException("Quitting Teller Machine.")
 

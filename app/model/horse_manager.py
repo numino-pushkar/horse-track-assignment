@@ -1,4 +1,6 @@
 from typing import Optional
+from app.model.horse import Horse
+
 
 class HorseManager:
     def __init__(self, horses: list[Horse]):
