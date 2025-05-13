@@ -1,11 +1,11 @@
 class CashInventory:
-    DEFAULT_STOCK = {100: 10, 20: 10, 10: 10, 5: 10, 1: 10}
 
-    def __init__(self):
-        self.inventory = CashInventory.DEFAULT_STOCK.copy()
+    def __init__(self, inventory=None):
+        self.default_stock = inventory
+        self.inventory = inventory
 
     def restock(self):
-        self.inventory = CashInventory.DEFAULT_STOCK.copy()
+        self.inventory = self.default_stock.copy()
 
     def add_back(self, bills: dict):
         for denom, count in bills.items():

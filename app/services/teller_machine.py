@@ -1,10 +1,15 @@
 from app.commands.command_registry import CommandRegistry
 from app.exceptions.exceptions import BettingTerminalException, QuitException
+from app.model.horse import Horse
+from app.model.cash_inventory import CashInventory
+from app.model.horse_manager import HorseManager
 
 
 class TellerMachine:
-    def __init__(self):
-        self.command_registry = CommandRegistry()
+    def __init__(self, horses: list[Horse], inventory: CashInventory):
+        self.cash_inventory = CashInventory(inventory)
+        self.horse_manager = HorseManager(horses)
+        self.command_registry = CommandRegistry(self.horse_manager,self.cash_inventory)
 
     def start(self):
         while True:
