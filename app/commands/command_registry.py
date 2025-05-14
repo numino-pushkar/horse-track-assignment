@@ -1,6 +1,6 @@
 from app.commands.place_bet_command import BetCommand as PlaceBetCommand
 from app.commands.set_winner_command import WinningsCommand as SetWinnerCommand
-from app.commands.inventory_command import InventoryCommand
+# from app.commands.inventory_command import InventoryCommand
 # from app.commands.display_command import DisplayCommand
 from app.commands.restock_command import RestockCommand
 from app.commands.quit_command import QuitCommand
@@ -17,7 +17,7 @@ class CommandRegistry:
             QUIT_COMMAND: QuitCommand(),
             RESTOCK_COMMAND: RestockCommand(self.cash_inventory),
             BET: PlaceBetCommand(self.horse_manager, self.cash_inventory),
-            INVENTORY: InventoryCommand(self.cash_inventory)
+            # INVENTORY: InventoryCommand(self.cash_inventory)
             # "display": DisplayCommand(self.horse_manager),
         }
 

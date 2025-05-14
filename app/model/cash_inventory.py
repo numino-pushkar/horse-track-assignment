@@ -3,6 +3,7 @@ class CashInventory:
     def __init__(self, inventory=None):
         self.default_stock = inventory
         self.inventory = inventory
+        print(self)
 
     def restock(self):
         self.inventory = self.default_stock.copy()
@@ -35,6 +36,6 @@ class CashInventory:
 
     def __str__(self):
         lines = ["Inventory:"]
-        for denom in sorted(self.inventory.keys(), reverse=True):
+        for denom in sorted(self.inventory.keys()):
             lines.append(f"${denom},{self.inventory[denom]}")
         return "\n".join(lines)

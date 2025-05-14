@@ -1,3 +1,4 @@
+from app.exceptions.exceptions import InvalidCommandException
 from app.interfaces.command import Command
 from app.model.cash_inventory import CashInventory
 
@@ -9,3 +10,7 @@ class RestockCommand(Command):
     def execute(self, args: list[str]) -> str:
         self.cash_inventory.restock()
         return str(self.cash_inventory)
+
+    def validate(self, args: list[str]) -> None:
+        if args:
+            raise InvalidCommandException("RestockCommand does not accept any arguments.")

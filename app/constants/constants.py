@@ -1,6 +1,6 @@
-PLACE = "place"
 QUIT_COMMAND = "q"
 RESTOCK_COMMAND = "r"
-INVENTORY = "inventory"
 WINNER_COMMAND = "w"
 BET = "bet"
+
+INITIAL_HORSE_WINNER = 1

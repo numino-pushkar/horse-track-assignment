@@ -5,3 +5,7 @@ from app.exceptions.exceptions import QuitException
 class QuitCommand(Command):
     def execute(self, args: list[str]) -> str:
         raise QuitException("Quitting Teller Machine.")
+
+    def validate(self, args: list[str]) -> None:
+        if args:
+            raise ValueError("QuitCommand does not accept any arguments.")

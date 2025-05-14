@@ -3,13 +3,15 @@ from app.exceptions.exceptions import BettingTerminalException, QuitException
 from app.model.horse import Horse
 from app.model.cash_inventory import CashInventory
 from app.model.horse_manager import HorseManager
+from app.constants.constants import INITIAL_HORSE_WINNER
 
 
 class TellerMachine:
     def __init__(self, horses: list[Horse], inventory: CashInventory):
         self.cash_inventory = CashInventory(inventory)
         self.horse_manager = HorseManager(horses)
-        self.command_registry = CommandRegistry(self.horse_manager,self.cash_inventory)
+        self.command_registry = CommandRegistry(self.horse_manager, self.cash_inventory)
+        self.horse_manager.set_winner(INITIAL_HORSE_WINNER)
 
     def start(self):
         while True:
@@ -23,14 +25,16 @@ class TellerMachine:
                 args = tokens[1:]
 
                 command = self.command_registry.get_command(command_name)
+                command.validate(args)
                 output = command.execute(args)
-                print(output)
+                print(self.cash_inventory)
+                print(self.horse_manager)
 
             except QuitException as qe:
                 print(str(qe))
                 break
             except BettingTerminalException as e:
-                print(f"Error: {str(e)}")
+                print(str(e))
             except Exception as e:
                 # Handle unexpected errors gracefully
                 print(f"Unexpected error: {str(e)}")

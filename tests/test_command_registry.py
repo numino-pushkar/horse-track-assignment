@@ -3,7 +3,7 @@ from unittest.mock import MagicMock
 
 from app.commands.place_bet_command import BetCommand as PlaceBetCommand
 from app.commands.set_winner_command import WinningsCommand as SetWinnerCommand
-from app.commands.inventory_command import InventoryCommand
+# from app.commands.inventory_command import InventoryCommand
 from app.commands.restock_command import RestockCommand
 from app.commands.quit_command import QuitCommand
 from app.exceptions.exceptions import InvalidCommandException
@@ -42,12 +42,12 @@ def test_registry_returns_winner_command(mock_dependencies):
     assert isinstance(command, SetWinnerCommand)
 
 
-def test_registry_returns_inventory_command(mock_dependencies):
-    horse_manager, cash_inventory = mock_dependencies
-    registry = CommandRegistry(horse_manager, cash_inventory)
-
-    command = registry.get_command("inventory")
-    assert isinstance(command, InventoryCommand)
+# def test_registry_returns_inventory_command(mock_dependencies):
+#     horse_manager, cash_inventory = mock_dependencies
+#     registry = CommandRegistry(horse_manager, cash_inventory)
+#
+#     command = registry.get_command("inventory")
+#     assert isinstance(command, InventoryCommand)
 
 
 def test_registry_returns_restock_command(mock_dependencies):

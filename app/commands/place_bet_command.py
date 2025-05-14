@@ -14,6 +14,21 @@ class BetCommand(Command):
         self.horse_manager = horse_manager
         self.cash_inventory = cash_inventory
 
+    def validate(self, args: list[str]) -> None:
+        if len(args) != 2:
+            raise InvalidBetFormatException(
+                "Invalid number of arguments. Expected 2 arguments: horse number and bet amount.")
+        if not args[0].isdigit() or not args[1].isdigit():
+            raise InvalidBetFormatException("Both arguments must be numeric.")
+
+        horse_number = int(args[0])
+        if not self.horse_manager.is_valid_horse(horse_number):
+            raise InvalidHorseException(f"Horse number {horse_number} does not exist.")
+
+        bet_amount = int(args[1])
+        if bet_amount <= 0:
+            raise InvalidBetFormatException("Bet amount must be a positive integer.")
+
     def execute(self, args: list[str]) -> str:
         if len(args) != 2 or not args[0].isdigit() or not args[1].isdigit():
             raise InvalidBetFormatException()
