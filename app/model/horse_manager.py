@@ -5,7 +5,6 @@ from app.model.horse import Horse
 class HorseManager:
     def __init__(self, horses: list[Horse]):
         self.horses = horses
-        print(self)
 
     def get_horse(self, number: int) -> Optional[Horse]:
         return next((h for h in self.horses if h.number == number), None)

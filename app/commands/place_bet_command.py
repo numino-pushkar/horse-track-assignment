@@ -1,12 +1,12 @@
 from app.exceptions.exceptions import (
     InvalidHorseException,
-    InvalidBetFormatException,
     NoPayoutException,
-    InsufficientFundsException,
+    InsufficientFundsException, InvalidBetAmountException,
 )
 from app.interfaces.command import Command
 from app.model.horse_manager import HorseManager
 from app.model.cash_inventory import CashInventory
+from app.utils.string_util import extract_inputs
 
 
 class BetCommand(Command):
@@ -14,31 +14,21 @@ class BetCommand(Command):
         self.horse_manager = horse_manager
         self.cash_inventory = cash_inventory
 
-    def validate(self, args: list[str]) -> None:
-        if len(args) != 2:
-            raise InvalidBetFormatException(
-                "Invalid number of arguments. Expected 2 arguments: horse number and bet amount.")
-        if not args[0].isdigit() or not args[1].isdigit():
-            raise InvalidBetFormatException("Both arguments must be numeric.")
+    def validate(self, command: str) -> None:
+        bet, horse_number = extract_inputs(command)
+        bet_amount: str = bet[1]
 
-        horse_number = int(args[0])
-        if not self.horse_manager.is_valid_horse(horse_number):
-            raise InvalidHorseException(f"Horse number {horse_number} does not exist.")
+        if not bet_amount.isdigit() or int(bet_amount) <= 0:
+            raise InvalidBetAmountException(str(bet_amount))
 
-        bet_amount = int(args[1])
-        if bet_amount <= 0:
-            raise InvalidBetFormatException("Bet amount must be a positive integer.")
+        if not horse_number.isdigit() or not self.horse_manager.is_valid_horse(int(horse_number)):
+            raise InvalidHorseException(horse_number)
 
-    def execute(self, args: list[str]) -> str:
-        if len(args) != 2 or not args[0].isdigit() or not args[1].isdigit():
-            raise InvalidBetFormatException()
+    def execute(self, args: list[str]) -> None:
 
         horse_number = int(args[0])
         amount = int(args[1])
         horse = self.horse_manager.get_horse(horse_number)
-
-        if horse is None:
-            raise InvalidHorseException(horse_number)
 
         if not horse.won:
             raise NoPayoutException(horse.name)
@@ -49,5 +39,5 @@ class BetCommand(Command):
         if bills is None:
             raise InsufficientFundsException(payout)
 
-        breakdown = " ".join([f"${denom},{count}" for denom, count in sorted(bills.items(), reverse=True)])
-        return f"Payout: {horse.name}, ${payout}\n{breakdown}"
+        breakdown = "\n".join([f"${denom},{count}" for denom, count in sorted(bills.items())])
+        print(f"Payout: {horse.name}, ${payout}\n{breakdown}")

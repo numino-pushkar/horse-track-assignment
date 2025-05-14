@@ -3,7 +3,6 @@ class CashInventory:
     def __init__(self, inventory=None):
         self.default_stock = inventory
         self.inventory = inventory
-        print(self)
 
     def restock(self):
         self.inventory = self.default_stock.copy()

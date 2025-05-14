@@ -23,6 +23,12 @@ class InvalidBetFormatException(BettingTerminalException):
         super().__init__(message)
 
 
+class InvalidBetAmountException(BettingTerminalException):
+    """Raised when a bet command is malformed or has wrong data types."""
+    def __init__(self, bet_amount: str):
+        super().__init__(f"Invalid Bet: {bet_amount}")
+
+
 class NoPayoutException(BettingTerminalException):
     """Raised when the selected horse did not win."""
     def __init__(self, horse_name: str):

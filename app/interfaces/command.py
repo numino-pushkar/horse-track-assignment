@@ -7,5 +7,5 @@ class Command(ABC):
         pass
 
     @abstractmethod
-    def validate(self, args: list[str]) -> None:
+    def validate(self, command: str) -> None:
         pass
