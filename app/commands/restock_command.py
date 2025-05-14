@@ -13,6 +13,6 @@ class RestockCommand(Command):
         return str(self.cash_inventory)
 
     def validate(self, command: str) -> None:
-        args, command = extract_inputs(command)
+        args, restock_command = extract_inputs(command)
         if len(args) > 1:
-            raise InvalidCommandException("RestockCommand does not accept any arguments.")
+            raise InvalidCommandException(command)

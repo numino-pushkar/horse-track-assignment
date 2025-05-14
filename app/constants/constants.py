@@ -8,7 +8,7 @@ BET = "bet"
 INITIAL_HORSE_WINNER = 1
 
 # Exception messages
-INVALID_COMMAND = "Invalid command: {}"
+INVALID_COMMAND = "Invalid Command: {}"
 INVALID_HORSE = "Invalid horse number: {}"
 INSUFFICIENT_FUNDS = "Insufficient funds to dispense ${}"
 INVALID_BET = "Invalid Bet: {}"
