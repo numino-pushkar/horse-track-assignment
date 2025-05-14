@@ -16,20 +16,6 @@ class TestCashInventory(unittest.TestCase):
         self.inventory.restock()
         self.assertEqual(self.inventory.inventory, self.initial_inventory)
 
-    def test_add_back(self):
-        bills = {20: 1, 1: 4}
-        self.inventory.add_back(bills)
-        expected = self.initial_inventory.copy()
-        expected[20] += 1
-        expected[1] += 4
-        self.assertEqual(self.inventory.inventory, expected)
-
-    def test_can_dispense_true(self):
-        self.assertTrue(self.inventory.can_dispense(85))  # Should be dispensable
-
-    def test_can_dispense_false(self):
-        self.assertFalse(self.inventory.can_dispense(999))  # Too high to dispense
-
     def test_dispense_success(self):
         result = self.inventory.dispense(130)
         self.assertIsNotNone(result)

@@ -36,13 +36,6 @@ class TestHorseManager(unittest.TestCase):
         self.assertFalse(result)
         self.assertTrue(all(not horse.won for horse in self.horses))
 
-    def test_list_horses(self):
-        horse_strings = self.manager.list_horses()
-        self.assertEqual(len(horse_strings), 3)
-        self.assertIn("1 Seabiscuit 5", horse_strings)
-        self.assertIn("2 Secretariat 3", horse_strings)
-        self.assertIn("3 Black Beauty 10", horse_strings)
-
 
 if __name__ == "__main__":
     unittest.main()

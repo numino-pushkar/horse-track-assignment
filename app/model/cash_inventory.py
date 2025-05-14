@@ -1,18 +1,11 @@
 class CashInventory:
 
     def __init__(self, inventory=None):
-        self.default_stock = inventory
-        self.inventory = inventory
+        self.default_stock = inventory.copy()
+        self.inventory = inventory.copy()
 
     def restock(self):
         self.inventory = self.default_stock.copy()
-
-    def add_back(self, bills: dict):
-        for denom, count in bills.items():
-            self.inventory[denom] += count
-
-    def can_dispense(self, amount: int) -> bool:
-        return self.dispense(amount) is not None
 
     def dispense(self, amount: int) -> dict | None:
         result = {}

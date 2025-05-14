@@ -16,9 +16,6 @@ class HorseManager:
             horse.won = horse.number == number
         return True
 
-    def list_horses(self) -> list[str]:
-        return [str(horse) for horse in self.horses]
-
     def is_valid_horse(self, horse_number: int) -> bool:
         return any(horse.number == horse_number for horse in self.horses)
 

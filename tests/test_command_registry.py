@@ -3,7 +3,6 @@ from unittest.mock import MagicMock
 
 from app.commands.place_bet_command import BetCommand as PlaceBetCommand
 from app.commands.set_winner_command import WinningsCommand as SetWinnerCommand
-# from app.commands.inventory_command import InventoryCommand
 from app.commands.restock_command import RestockCommand
 from app.commands.quit_command import QuitCommand
 from app.exceptions.exceptions import InvalidCommandException
