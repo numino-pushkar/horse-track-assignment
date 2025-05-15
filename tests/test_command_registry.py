@@ -41,12 +41,32 @@ def test_registry_returns_restock_command(mock_dependencies):
     assert isinstance(command, RestockCommand)
 
 
+def test_registry_raises_invalid_restock_command(mock_dependencies):
+    horse_manager, cash_inventory = mock_dependencies
+    registry = CommandRegistry(horse_manager, cash_inventory)
+
+    with pytest.raises(InvalidCommandException) as exc_info:
+        registry.get_command("restock")
+
+    assert "invalid" in str(exc_info.value).lower()
+
+
 def test_registry_returns_quit_command(mock_dependencies):
     horse_manager, cash_inventory = mock_dependencies
     registry = CommandRegistry(horse_manager, cash_inventory)
 
     command = registry.get_command("q")
     assert isinstance(command, QuitCommand)
+
+
+def test_registry_raises_invalid_quit_command(mock_dependencies):
+    horse_manager, cash_inventory = mock_dependencies
+    registry = CommandRegistry(horse_manager, cash_inventory)
+
+    with pytest.raises(InvalidCommandException) as exc_info:
+        registry.get_command("quit")
+
+    assert "invalid" in str(exc_info.value).lower()
 
 
 def test_registry_raises_invalid_command(mock_dependencies):
