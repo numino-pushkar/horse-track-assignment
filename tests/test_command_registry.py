@@ -21,15 +21,7 @@ def test_registry_returns_place_command(mock_dependencies):
     horse_manager, cash_inventory = mock_dependencies
     registry = CommandRegistry(horse_manager, cash_inventory)
 
-    command = registry.get_command("place")
-    assert isinstance(command, PlaceBetCommand)
-
-
-def test_registry_returns_bet_command_alias(mock_dependencies):
-    horse_manager, cash_inventory = mock_dependencies
-    registry = CommandRegistry(horse_manager, cash_inventory)
-
-    command = registry.get_command("bet")
+    command = registry.get_command("1")
     assert isinstance(command, PlaceBetCommand)
 
 
@@ -37,23 +29,15 @@ def test_registry_returns_winner_command(mock_dependencies):
     horse_manager, cash_inventory = mock_dependencies
     registry = CommandRegistry(horse_manager, cash_inventory)
 
-    command = registry.get_command("winner")
+    command = registry.get_command("w")
     assert isinstance(command, SetWinnerCommand)
-
-
-# def test_registry_returns_inventory_command(mock_dependencies):
-#     horse_manager, cash_inventory = mock_dependencies
-#     registry = CommandRegistry(horse_manager, cash_inventory)
-#
-#     command = registry.get_command("inventory")
-#     assert isinstance(command, InventoryCommand)
 
 
 def test_registry_returns_restock_command(mock_dependencies):
     horse_manager, cash_inventory = mock_dependencies
     registry = CommandRegistry(horse_manager, cash_inventory)
 
-    command = registry.get_command("restock")
+    command = registry.get_command("r")
     assert isinstance(command, RestockCommand)
 
 
@@ -61,7 +45,7 @@ def test_registry_returns_quit_command(mock_dependencies):
     horse_manager, cash_inventory = mock_dependencies
     registry = CommandRegistry(horse_manager, cash_inventory)
 
-    command = registry.get_command("quit")
+    command = registry.get_command("q")
     assert isinstance(command, QuitCommand)
 
 

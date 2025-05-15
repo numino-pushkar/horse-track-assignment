@@ -1,6 +1,6 @@
 import pytest
 from app.commands.quit_command import QuitCommand
-from app.constants.constants import INVALID_COMMAND
+from app.constants.constants import INVALID_COMMAND_MESSAGE
 from app.exceptions.exceptions import InvalidCommandException
 
 
@@ -27,7 +27,7 @@ def test_quit_command_validate_invalid_command_raises_invalid_command_exception(
     command = QuitCommand()
     with pytest.raises(InvalidCommandException) as exc_info:
         command.validate(input_command)
-    assert INVALID_COMMAND.format(input_command) in str(exc_info.value)
+    assert INVALID_COMMAND_MESSAGE.format(input_command) in str(exc_info.value)
 
 
 def test_quit_command_validate_q_with_extra_arguments_raises_invalid_command_exception():
@@ -35,7 +35,7 @@ def test_quit_command_validate_q_with_extra_arguments_raises_invalid_command_exc
     command = QuitCommand()
     with pytest.raises(InvalidCommandException) as exc_info:
         command.validate(input_command)
-    assert INVALID_COMMAND.format(input_command) in str(exc_info.value)
+    assert INVALID_COMMAND_MESSAGE.format(input_command) in str(exc_info.value)
 
 
 def test_quit_command_validate_q_with_whitespace_does_not_raise_exception():

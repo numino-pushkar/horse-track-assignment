@@ -1,3 +1,4 @@
+from app.constants.constants import PAYOUT_MESSAGE
 from app.exceptions.exceptions import (
     InvalidHorseException,
     NoPayoutException,
@@ -40,4 +41,4 @@ class BetCommand(Command):
             raise InsufficientFundsException(payout)
 
         breakdown = "\n".join([f"${denom},{count}" for denom, count in sorted(bills.items())])
-        print(f"Payout: {horse.name}, ${payout}\n{breakdown}")
+        print(PAYOUT_MESSAGE.format(horse_name=horse.name, payout=payout, breakdown=breakdown))

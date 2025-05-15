@@ -37,6 +37,9 @@ def test_validate_invalid_bet_amount(mock_dependencies):
     with pytest.raises(InvalidBetAmountException):
         command.validate("1 abc")
 
+    with pytest.raises(InvalidBetAmountException):
+        command.validate("1 10.24")
+
 
 def test_validate_invalid_horse_number(mock_dependencies):
     horse_manager, cash_inventory = mock_dependencies

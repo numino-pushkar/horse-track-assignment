@@ -1,7 +1,7 @@
 import pytest
 from unittest.mock import MagicMock
 from app.commands.restock_command import RestockCommand
-from app.constants.constants import INVALID_COMMAND
+from app.constants.constants import INVALID_COMMAND_MESSAGE
 from app.exceptions.exceptions import InvalidCommandException
 
 
@@ -38,5 +38,5 @@ def test_restock_command_validates_lowercase_r(mock_cash_inventory):
 def test_restock_command_raises_exception_for_invalid_arguments(mock_cash_inventory):
     input_command = "R 100"
     command = RestockCommand(mock_cash_inventory)
-    with pytest.raises(InvalidCommandException, match=INVALID_COMMAND.format(input_command)):
+    with pytest.raises(InvalidCommandException, match=INVALID_COMMAND_MESSAGE.format(input_command)):
         command.validate(input_command)
