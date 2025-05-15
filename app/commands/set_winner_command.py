@@ -19,10 +19,10 @@ class WinningsCommand(Command):
     def validate(self, command: str) -> None:
         args, command = extract_inputs(command)
         if len(args) != 2:
-            raise InvalidCommandException("Invalid number of arguments. Expected 1 argument.")
+            raise InvalidCommandException(command)
         horse_number = args[1]
         if not horse_number.isdigit():
-            raise InvalidHorseException(f"Invalid horse number: {horse_number}")
+            raise InvalidHorseException(horse_number)
         elif not self.horse_manager.is_valid_horse(int(horse_number)):
             raise InvalidHorseException(str(horse_number))
 
