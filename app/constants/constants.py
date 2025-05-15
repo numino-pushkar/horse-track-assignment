@@ -8,8 +8,9 @@ BET = "bet"
 INITIAL_HORSE_WINNER = 1
 
 # Exception messages
-INVALID_COMMAND = "Invalid Command: {}"
-INVALID_HORSE = "Invalid horse number: {}"
-INSUFFICIENT_FUNDS = "Insufficient funds to dispense ${}"
-INVALID_BET = "Invalid Bet: {}"
-NO_PAYOUT = "No Payout: {}"
+INVALID_COMMAND_MESSAGE = "Invalid Command: {}"
+INVALID_HORSE_MESSAGE = "Invalid horse number: {}"
+INSUFFICIENT_FUNDS_MESSAGE = "Insufficient funds to dispense ${}"
+INVALID_BET_MESSAGE = "Invalid Bet: {}"
+NO_PAYOUT_MESSAGE = "No Payout: {}"
+PAYOUT_MESSAGE = "Payout: {horse_name}, ${payout}\n{breakdown}"
